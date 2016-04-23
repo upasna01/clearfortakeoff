@@ -27,7 +27,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Installation
- 1. git clone https://github.com/upasna01/clearfortakeoff
+ 1. clone project using command: git clone https://github.com/upasna01/clearfortakeoff
  2. cd clearfortakeoff/
  3. install the application dependencies using command: composer install
  4. give write permission to the storage folder using chmod -R 777 storage
