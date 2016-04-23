@@ -32,7 +32,7 @@ class Weather
 
     }
 
-    public function getHourlyWeatherForecast($state, $city, $hour)
+    public function getHourlyWeatherForecast($state, $city)
     {
         try {
             $json_string = file_get_contents(
