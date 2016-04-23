@@ -31,4 +31,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
  2. cd clearfortakeoff/
  3. install the application dependencies using command: composer install
  4. give write permission to the storage folder using chmod -R 777 storage
+ 5. generate key using command: php artisan key:generate
  5. Serve application using php artisan serve 
