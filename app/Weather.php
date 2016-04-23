@@ -33,6 +33,7 @@ class Weather
 
     }
 
+<<<<<<< HEAD
     /**
      * Get weatehr foreecast for today
      *
@@ -42,6 +43,9 @@ class Weather
      * @return $this|mixed
      */
     public function getHourlyWeatherForecast($state, $city, $hour)
+=======
+    public function getHourlyWeatherForecast($state, $city)
+>>>>>>> 9f9c6520e9db61d79f50fda540b9b57c9f3f55bc
     {
         try {
             $json_string = file_get_contents(
