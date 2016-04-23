@@ -10,6 +10,7 @@ use Mockery\CountValidator\Exception;
 class Weather
 {
     /** Get Weather forecast of four days
+     *
      * @param $state
      * @param $city
      * @return mixed
@@ -32,6 +33,14 @@ class Weather
 
     }
 
+    /**
+     * Get weatehr foreecast for today
+     *
+     * @param $state
+     * @param $city
+     * @param $hour
+     * @return $this|mixed
+     */
     public function getHourlyWeatherForecast($state, $city, $hour)
     {
         try {
