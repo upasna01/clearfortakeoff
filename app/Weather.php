@@ -18,6 +18,7 @@ class Weather
     public function getSelectedWeatherForecast($state, $city, $selection)
     {
         try {
+
             $json_string = file_get_contents(
                 sprintf("http://api.wunderground.com/api/ee166ad90617bbb5/forecast/q/US/%s/%s.json", $state, $city)
             );
@@ -33,19 +34,18 @@ class Weather
 
     }
 
-<<<<<<< HEAD
+
     /**
-     * Get weatehr foreecast for today
+     * Get weather foreecast for today
      *
      * @param $state
      * @param $city
      * @param $hour
      * @return $this|mixed
      */
-    public function getHourlyWeatherForecast($state, $city, $hour)
-=======
+
     public function getHourlyWeatherForecast($state, $city)
->>>>>>> 9f9c6520e9db61d79f50fda540b9b57c9f3f55bc
+
     {
         try {
             $json_string = file_get_contents(
@@ -58,4 +58,61 @@ class Weather
             return redirect()->back()->withErrors('Sorry cannot fetch weather forecast');
         }
     }
+
+    /**
+     * Get if speed of wind is in safe range
+     *
+     * @param $windSpeed
+     * @return bool
+     */
+    public function findIfSafeWind($windSpeed)
+    {
+        $lowerRange = '0';
+        $upperRange = '24';
+        if (($lowerRange < $windSpeed) && ($windSpeed <= $upperRange)){
+
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get if safe range of viibility exits
+     *
+     * @param $visiblity
+     * @return bool
+     */
+    public function findIfSafeVisibility($visiblity)
+    {
+        $visible = 1;
+        if( $visible <= $visiblity){
+
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * Get if the temperature lies in safe range
+     *
+     * @param $temperature
+     * @return bool
+     */
+    public function findIfSafeTemperature($temperature)
+    {
+        $lowerRange = '0';
+        $upperRange = '24';
+        if (($lowerRange < $temperature) && ($temperature <= $upperRange)){
+
+            return true;
+        }
+        return false;
+    }
+
+    public function findIfSafeWeather($weather)
+    {
+
+    }
+
 }

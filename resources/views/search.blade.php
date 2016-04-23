@@ -6,7 +6,16 @@
         <h3>Predict Your Flight Delays</h3>
         <div class="col-sm-6">
             <form action="{{ route('result') }}" method="post">
-                <div class="form-group ">
+                <div class="form-group">
+                    <select class="form-control" name="day">
+                        <option value="">Select Day</option>
+                        <option value="0">Today</option>
+                        <option value="1">Tomorrow</option>
+                        <option value="2">The Day After Tomorrow</option>
+                        <option value="3">The Next Day </option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="departure_state">Your Departure State</label>
                     <select class="form-control" name="departure_state">
                         <option value="">Departure State</option>
@@ -119,11 +128,12 @@
                         <option value="Cheyenne">Cheyenne</option>
                     </select>
                 </div>
-                <div class=" form-group">
+                <div class=" form-group" name="time">
                     <label for="departure_time">Your Departure Time</label>
                     <select class="form-control" name="departure_time">
                         <option value="">Departure Time</option>
-                        <option value="6">6 a.m</option>
+                        <option value="am"> A.M</option>
+                        <option value="pm"> P.M</option>
                     </select>
                 </div>
 
@@ -242,11 +252,12 @@
                     </select>
                 </div>
 
-                <div class=" form-group">
+                <div class=" form-group" name="time">
                     <label for="arrival_time">Your Arrival Time</label>
                     <select class="form-control" name="arrival_time">
                         <option value="">Arrival Time</option>
-                        <option value="8">8 a.m</option>
+                        <option value="am"> A.M</option>
+                        <option value="pm"> P.M</option>
                     </select>
                 </div>
 

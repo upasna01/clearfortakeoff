@@ -26,6 +26,6 @@ Route::get('/search',[
 ]);
 
 Route::post('/result',[
-   'uses' => "WeatherReportController@flightResult",
+   'uses' => "WeatherReportController@getflightDelay",
    'as'   => 'result'
 ]);
