@@ -63,14 +63,14 @@ class WeatherReportController extends Controller
      */
     public function flightResult(Request $request)
     {
-        $DepartureCity = $request['departure_city'];
-        $DepartureAirport = $request['departure_airport'];
-        $DepartureTime = $request['departure_time'];
-        $ArrivalCity = $request['arrival_city'];
-        $ArrivalAirport = $request['arrival_airport'];
-        $ArrivalTime = $request['arrival_time'];
+        $DepartureState = $request['departure_state'];
+        $DepartureCity  = $request['departure_city'];
+        $DepartureTime  = $request['departure_time'];
+        $ArrivalState   = $request['arrival_state'];
+        $ArrivalCity    = $request['arrival_city'];
+        $ArrivalTime    = $request['arrival_time'];
 
-        dd($ArrivalAirport, $DepartureCity, $DepartureAirport, $DepartureTime, $ArrivalCity, $ArrivalTime );
+        dd($DepartureState, $DepartureCity, $DepartureTime, $ArrivalState, $ArrivalCity, $ArrivalTime );
         return view('result');
     }
 
