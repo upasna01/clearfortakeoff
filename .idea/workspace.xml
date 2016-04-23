@@ -59,8 +59,8 @@
       <file leaf-file-name="search.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/search.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0478723">
-              <caret line="156" column="62" selection-start-line="156" selection-start-column="62" selection-end-line="156" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.61702126">
+              <caret line="118" column="66" selection-start-line="118" selection-start-column="66" selection-end-line="118" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -687,8 +687,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/search.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0478723">
-          <caret line="156" column="62" selection-start-line="156" selection-start-column="62" selection-end-line="156" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.61702126">
+          <caret line="118" column="66" selection-start-line="118" selection-start-column="66" selection-end-line="118" selection-end-column="66" />
           <folding />
         </state>
       </provider>
