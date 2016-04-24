@@ -15,14 +15,14 @@ class WeatherReportController extends Controller
     protected $weather;
 
     /**
+     * WeatherReportController constructor.
      * @param Weather $weather
      */
-    public function _construct(
-
-        Weather $weather
-    ){
+    public function __construct (Weather $weather)
+    {
         $this->weather = $weather;
     }
+
 
     /**
      * Get weather data for country not required for now since we are using api from wunderground
@@ -82,17 +82,10 @@ class WeatherReportController extends Controller
         $arrivalState   = $request['arrival_state'];
         $arrivalCity    = $request['arrival_city'];
         $selection      = $request['day'];
-//        $arrivalTime    = $request['arrival_time'];
-//        $departureTime  = $request['departure_time'];
-
-//        if(isset($arrivalTime) && isset($departureTime))
-//        {
-//            $departureWeather = $this->getHourlyWeatherForecast($departureState,$departureCity,$selection,$arrivalTime);
-//            $arrivalWeather   = $this->getHourlyWeatherForecast($departureState,$departureCity,$selection,$arrivalTime);
-//        }
 
         $departureWeather = $this->weatherForecast($departureState,$departureCity,$selection);
         $arrivalWeather   = $this->weatherForecast($arrivalState,$arrivalCity,$selection);
+
         if (!empty($departureWeather && $arrivalWeather))
         {
             $departureAnalysed = $this->analyseWeather($departureWeather);
@@ -114,7 +107,6 @@ class WeatherReportController extends Controller
      */
     public function weatherForecast($state, $city, $selection)
     {
-        //$state = "AL";$city="Montgomery";$selection="1";
         return $this->weather->getSelectedWeatherForecast($state,$city,$selection);
     }
 
@@ -138,12 +130,12 @@ class WeatherReportController extends Controller
      */
     public function analyseWeather($weathers)
     {
-        $windSpeed = $this->weather->findIfSafeWind($weathers->wind);
-        $weather = $this->weather->findIfSafeWeather($weathers->weather);
-        $temperature = $this->weather->findIfSafeTemperature($weathers->temperature);
-        $visibility = $this->weather->findIfSafeVisibility($weathers->visibility);
+        $windSpeed = $this->weather->findIfSafeWind($weathers->maxwind->mph,$weathers->avewind->mph);
+        $weather = $this->weather->findIfSafeWeather($weathers);
+        $temperatureRange = $this->weather->findIfSafeTemperature($weathers->high->celsius,$weathers->low->celsius);
+        $humidity = $this->weather->findIfSafeHumidity($weathers->avehumidity);
 
-        if($windSpeed==true && $weather==true && $temperature ==true && $visibility==true)
+        if($windSpeed==true && $weather==true && $temperatureRange ==true && $humidity==true)
         {
             return true;
         }

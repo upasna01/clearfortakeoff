@@ -128,14 +128,14 @@
                         <option value="Cheyenne">Cheyenne</option>
                     </select>
                 </div>
-                <div class=" form-group" name="time">
-                    <label for="departure_time">Your Departure Time</label>
-                    <select class="form-control" name="departure_time">
-                        <option value="">Departure Time</option>
-                        <option value="am"> A.M</option>
-                        <option value="pm"> P.M</option>
-                    </select>
-                </div>
+                {{--<div class=" form-group" name="time">--}}
+                    {{--<label for="departure_time">Your Departure Time</label>--}}
+                    {{--<select class="form-control" name="departure_time">--}}
+                        {{--<option value="">Departure Time</option>--}}
+                        {{--<option value="am"> A.M</option>--}}
+                        {{--<option value="pm"> P.M</option>--}}
+                    {{--</select>--}}
+                {{--</div>--}}
 
                 <div class=" form-group">
                     <label for="arrival_state">Your Arrival State</label>
@@ -252,14 +252,14 @@
                     </select>
                 </div>
 
-                <div class=" form-group" name="time">
-                    <label for="arrival_time">Your Arrival Time</label>
-                    <select class="form-control" name="arrival_time">
-                        <option value="">Arrival Time</option>
-                        <option value="am"> A.M</option>
-                        <option value="pm"> P.M</option>
-                    </select>
-                </div>
+                {{--<div class=" form-group" name="time">--}}
+                    {{--<label for="arrival_time">Your Arrival Time</label>--}}
+                    {{--<select class="form-control" name="arrival_time">--}}
+                        {{--<option value="">Arrival Time</option>--}}
+                        {{--<option value="am"> A.M</option>--}}
+                        {{--<option value="pm"> P.M</option>--}}
+                    {{--</select>--}}
+                {{--</div>--}}
 
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
