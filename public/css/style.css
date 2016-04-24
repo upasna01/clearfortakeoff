@@ -1,3 +1,7 @@
+body{
+    margin:0px;
+    padding:0px;
+}
 .table{
     max-width: 960px;
     margin: 0 auto;
@@ -28,4 +32,20 @@ table thead th:nth-child(3){
     border-bottom:0;
     border-left:0;
     border-right:0;
+}
+.messageContainer{
+    background-color: white;
+    margin-bottom: 30px;
+}
+
+.predictImage img{
+    display: block;
+    margin:0px auto;
+}
+.alertText, .detailText{
+   text-align: center;
+}
+
+.detailText p {
+    color :#777;
 }

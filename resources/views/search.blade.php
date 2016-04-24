@@ -2,6 +2,7 @@
 
 @section('content')
 
+    @include('errors.errors')
     <div class = "row">
         <h3>Predict Your Flight Delays</h3>
         <div class="col-sm-6">
@@ -19,11 +20,14 @@
                     <label for="departure_state">Your Departure State</label>
                     <select class="form-control" name="departure_state">
                         <option value="">Departure State</option>
-                        <option value="AL">Alabama </option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona </option>
-                        <option value="AR">Arkansas </option>
-                        <option value="CA">California </option>
+                        <option value="AL" name="Al">Alabama </option>
+                        <option value="AK" name="AK">Alaska</option>
+                        <option value="AZ" name="AZ">Arizona </option>
+                        <option value="AR" name="AR">Arkansas </option>
+                        <option value="CA" name="CA">California </option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
                         <option value="CO">Colorado </option>
                         <option value="CT">Connecticut </option>
                         <option value="DE">Delaware </option>
@@ -57,9 +61,6 @@
                         <option value="OK">Oklahoma</option>
                         <option value="OR">Oregon</option>
                         <option value="PA">Pennsylvania</option>
-                        <option value="RI">Rhode Island</option>
-                        <option value="SC">South Carolina</option>
-                        <option value="SD">South Dakota</option>
                         <option value="TN">Tennessee</option>
                         <option value="TX">Texas</option>
                         <option value="UT">Utah</option>
@@ -248,7 +249,7 @@
                         <option value="Charleston">Charleston</option>
                         <option value="Madison">Madison</option>
                         <option value="Cheyenne">Cheyenne</option>
-
+{{----}}
                     </select>
                 </div>
 

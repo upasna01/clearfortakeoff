@@ -6,6 +6,7 @@ use App\Weather;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
+
 class WeatherReportController extends Controller
 {
 
@@ -18,7 +19,7 @@ class WeatherReportController extends Controller
      * WeatherReportController constructor.
      * @param Weather $weather
      */
-    public function __construct (Weather $weather)
+    public function __construct(Weather $weather)
     {
         $this->weather = $weather;
     }
@@ -41,21 +42,22 @@ class WeatherReportController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getCsvToArray(){
+    public function getCsvToArray()
+    {
 
-        $header = NULL;
-        $weatherData  = array();
-        if (($handle = fopen('forecast.csv', 'r')) !== FALSE)
-        {
-            while (($row = fgetcsv($handle, 1000, ",")) !== FALSE)
-            {
-                if(!$header)
+        $header      = null;
+        $weatherData = [];
+        if (($handle = fopen('forecast.csv', 'r')) !== false) {
+            while (($row = fgetcsv($handle, 1000, ",")) !== false) {
+                if (!$header) {
                     $header = $row;
-                else
+                } else {
                     $weatherData[] = array_combine($header, $row);
+                }
             }
             fclose($handle);
         }
+
         return $weatherData;
     }
 
@@ -77,23 +79,41 @@ class WeatherReportController extends Controller
      */
     public function getflightDelay(Request $request)
     {
+        $rules     = [
+            'day'             => 'required',
+            'departure_state' => 'required',
+            'departure_city'  => 'required',
+            'arrival_state'   => 'required',
+            'arrival_city'    => 'required'
+        ];
+
+        $messages = [
+            'day.required' => 'Please select day',
+            'departure_state.required' => 'Please select departure state',
+            'departure_city.required' => 'Please select departure city',
+            'arrival_state.required' => 'Please select arrival state',
+            'arrival_city.required' => 'Please select arrival city',
+        ];
+
+        $this->validate($request,$rules,$messages);
+
         $departureState = $request['departure_state'];
         $departureCity  = $request['departure_city'];
         $arrivalState   = $request['arrival_state'];
         $arrivalCity    = $request['arrival_city'];
         $selection      = $request['day'];
 
-        $departureWeather = $this->weatherForecast($departureState,$departureCity,$selection);
-        $arrivalWeather   = $this->weatherForecast($arrivalState,$arrivalCity,$selection);
+        $departureWeather = $this->weatherForecast($departureState, $departureCity, $selection);
+        $arrivalWeather   = $this->weatherForecast($arrivalState, $arrivalCity, $selection);
 
-        if (!empty($departureWeather && $arrivalWeather))
-        {
+        if (!empty($departureWeather && $arrivalWeather)) {
             $departureAnalysed = $this->analyseWeather($departureWeather);
             $arrivalAnalysed   = $this->analyseWeather($arrivalWeather);
 
-            return view('result', compact('departureWeather','arrivalWeather','departureAnalysed','arrivalAnalysed'));
+            return view('result', compact('departureState', 'departureCity', 'arrivalState', 'arrivalCity', 'departureWeather', 'arrivalWeather', 'departureAnalysed', 'arrivalAnalysed'));
+        } else {
+            return back()->withError('Sorry, cannot fetch Weather forecast');
         }
-        else return back()->withError('Sorry, cannot fetch Weather forecast');
 
     }
 
@@ -107,7 +127,7 @@ class WeatherReportController extends Controller
      */
     public function weatherForecast($state, $city, $selection)
     {
-        return $this->weather->getSelectedWeatherForecast($state,$city,$selection);
+        return $this->weather->getSelectedWeatherForecast($state, $city, $selection);
     }
 
     /**
@@ -130,13 +150,12 @@ class WeatherReportController extends Controller
      */
     public function analyseWeather($weathers)
     {
-        $windSpeed = $this->weather->findIfSafeWind($weathers->maxwind->mph,$weathers->avewind->mph);
-        $weather = $this->weather->findIfSafeWeather($weathers);
-        $temperatureRange = $this->weather->findIfSafeTemperature($weathers->high->celsius,$weathers->low->celsius);
-        $humidity = $this->weather->findIfSafeHumidity($weathers->avehumidity);
+        $windSpeed        = $this->weather->findIfSafeWind($weathers->maxwind->mph, $weathers->avewind->mph);
+        $weather          = $this->weather->findIfSafeWeather($weathers);
+        $temperatureRange = $this->weather->findIfSafeTemperature($weathers->high->celsius, $weathers->low->celsius);
+        $humidity         = $this->weather->findIfSafeHumidity($weathers->avehumidity);
 
-        if($windSpeed==true && $weather==true && $temperatureRange ==true && $humidity==true)
-        {
+        if ($windSpeed == true && $weather == true && $temperatureRange == true && $humidity == true) {
             return true;
         }
 

@@ -4,6 +4,30 @@
     @include('errors.errors')
 
     @if(isset($arrivalWeather) && isset($departureWeather))
+        <div class="messageContainer">
+                <div class="predictImage">
+                    @if($departureAnalysed && $arrivalAnalysed)
+                        <img src="/img/happy.png" />
+
+                    @else
+                        <img src="/img/sad.png" />
+                    @endif
+                </div>
+                <div class="alertText">
+                    @if($departureAnalysed && $arrivalAnalysed)
+                      <h2>On Time!</h2>
+                    @else
+                        <h2>Delayed!</h2>
+                    @endif
+                </div>
+                <div class="detailText">
+                    @if($departureAnalysed && $arrivalAnalysed)
+                       <p>Hey Good news! Your flight will be on time.</p>
+                    @else
+                        <p>Sorry! It seems your flight will be delayed.</p>
+                    @endif
+                </div>
+        </div>
     <table class="table table-striped">
         <thead>
             <th>Weather</th>
@@ -11,6 +35,12 @@
             <th>Departure Weather</th>
         </thead>
         <tbody>
+            <tr>
+                <td><p>Location</p></td>
+                <td>{{$arrivalState}}, {{$arrivalCity}}</td>
+                <td>{{$departureState}}, {{$departureCity}}</td>
+            </tr>
+
             <tr>
                 <td><p>Weather Condition</p></td>
                 <td>{{$arrivalWeather->conditions}}</td>
