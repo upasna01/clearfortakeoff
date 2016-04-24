@@ -19,13 +19,11 @@ class Weather
     {
         try {
 
-            $json_string = file_get_contents(
+            $json_string     = file_get_contents(
                 sprintf("http://api.wunderground.com/api/ee166ad90617bbb5/forecast/q/US/%s/%s.json", $state, $city)
             );
-            $parsed_json = json_decode($json_string);
-
-            $fourDaysForecast = $this->getWeatherForecast($state, $city);
-            $nextDayForecast  = $fourDaysForecast->forecast->simpleforecast->forecastday[$selection];
+            $parsed_json     = json_decode($json_string);
+            $nextDayForecast = $parsed_json->forecast->simpleforecast->forecastday[$selection];
 
             return $nextDayForecast;
         } catch (Exception $exception) {
@@ -45,7 +43,6 @@ class Weather
      */
 
     public function getHourlyWeatherForecast($state, $city)
-
     {
         try {
             $json_string = file_get_contents(
@@ -69,10 +66,11 @@ class Weather
     {
         $lowerRange = '0';
         $upperRange = '24';
-        if (($lowerRange < $windSpeed) && ($windSpeed <= $upperRange)){
+        if (($lowerRange < $windSpeed) && ($windSpeed <= $upperRange)) {
 
             return true;
         }
+
         return false;
     }
 
@@ -85,10 +83,11 @@ class Weather
     public function findIfSafeVisibility($visiblity)
     {
         $visible = 1;
-        if( $visible <= $visiblity){
+        if ($visible <= $visiblity) {
 
             return true;
         }
+
         return false;
 
     }
@@ -103,10 +102,11 @@ class Weather
     {
         $lowerRange = '0';
         $upperRange = '24';
-        if (($lowerRange < $temperature) && ($temperature <= $upperRange)){
+        if (($lowerRange < $temperature) && ($temperature <= $upperRange)) {
 
             return true;
         }
+
         return false;
     }
 

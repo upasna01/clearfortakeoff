@@ -17,7 +17,7 @@ class WeatherReportController extends Controller
     /**
      * @param Weather $weather
      */
-    public function _construct(
+    public function __construct(
 
         Weather $weather
     ){
@@ -82,25 +82,19 @@ class WeatherReportController extends Controller
         $arrivalState   = $request['arrival_state'];
         $arrivalCity    = $request['arrival_city'];
         $selection      = $request['day'];
-//        $arrivalTime    = $request['arrival_time'];
-//        $departureTime  = $request['departure_time'];
-
-//        if(isset($arrivalTime) && isset($departureTime))
-//        {
-//            $departureWeather = $this->getHourlyWeatherForecast($departureState,$departureCity,$selection,$arrivalTime);
-//            $arrivalWeather   = $this->getHourlyWeatherForecast($departureState,$departureCity,$selection,$arrivalTime);
-//        }
 
         $departureWeather = $this->weatherForecast($departureState,$departureCity,$selection);
         $arrivalWeather   = $this->weatherForecast($arrivalState,$arrivalCity,$selection);
-        if (!empty($departureWeather && $arrivalWeather))
-        {
-            $departureAnalysed = $this->analyseWeather($departureWeather);
-            $arrivalAnalysed   = $this->analyseWeather($arrivalWeather);
+        return view('result', compact('departureWeather','arrivalWeather'));
 
-            return view('result', compact('departureAnalysed','arrivalAnalysed'));
-        }
-        else return back()->withError('Sorry, cannot fetch Weather forecast');
+//        if (!empty($departureWeather && $arrivalWeather))
+//        {
+//            $departureAnalysed = $this->analyseWeather($departureWeather);
+//            $arrivalAnalysed   = $this->analyseWeather($arrivalWeather);
+//
+//            return view('result', compact('departureWeather','arrivalWeather','departureAnalysed','arrivalAnalysed'));
+//        }
+//        else return back()->withError('Sorry, cannot fetch Weather forecast');
 
     }
 

@@ -1,0 +1,31 @@
+.table{
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.table-bordered {
+  border: 0;
+}
+
+.table>thead>tr>th{
+    padding-left: 40px;
+}
+
+table thead th:nth-child(1){
+    background: url("/img/weather.png") no-repeat left center;
+}
+
+table thead th:nth-child(2){
+    background: url("/img/arrival-icon.png") no-repeat left center;
+}
+
+table thead th:nth-child(3){
+    background: url("/img/departure-icon.png") no-repeat left center;
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+    border-top: 1px solid #ccc;
+    border-bottom:0;
+    border-left:0;
+    border-right:0;
+}
