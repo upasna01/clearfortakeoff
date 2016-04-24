@@ -22,8 +22,9 @@ class Weather
             $json_string     = file_get_contents(
                 sprintf("http://api.wunderground.com/api/ee166ad90617bbb5/forecast/q/US/%s/%s.json", $state, $city)
             );
-            $parsed_json     = json_decode($json_string);
-            $nextDayForecast = $parsed_json->forecast->simpleforecast->forecastday[$selection];
+            $parsed_json = json_decode($json_string);
+
+            $nextDayForecast  = $parsed_json ->forecast->simpleforecast->forecastday[$selection];
 
             return $nextDayForecast;
         } catch (Exception $exception) {
@@ -38,7 +39,6 @@ class Weather
      *
      * @param $state
      * @param $city
-     * @param $hour
      * @return $this|mixed
      */
 
@@ -56,17 +56,20 @@ class Weather
         }
     }
 
+
     /**
-     * Get if speed of wind is in safe range
+     * Find the safe range for wind
      *
-     * @param $windSpeed
+     * @param $maxSpeed
+     * @param $avgSpeed
      * @return bool
      */
-    public function findIfSafeWind($windSpeed)
+    public function findIfSafeWind($maxSpeed, $avgSpeed)
     {
         $lowerRange = '0';
         $upperRange = '24';
-        if (($lowerRange < $windSpeed) && ($windSpeed <= $upperRange)) {
+
+        if (($avgSpeed > $lowerRange  ) && ($maxSpeed <= $upperRange)){
 
             return true;
         }
@@ -75,34 +78,34 @@ class Weather
     }
 
     /**
-     * Get if safe range of viibility exits
+     * Get if safe range of humidity exits
      *
-     * @param $visiblity
+     * @param $avghumidity
      * @return bool
      */
-    public function findIfSafeVisibility($visiblity)
+    public function findIfSafeHumidity($avghumidity)
     {
-        $visible = 1;
-        if ($visible <= $visiblity) {
+        $low = '40';
+        $high = '70';
+        if(($avghumidity > $low) && ($avghumidity < $high)){
 
             return true;
         }
 
         return false;
-
     }
 
     /**
      * Get if the temperature lies in safe range
      *
-     * @param $temperature
+     * @param $low,$high
      * @return bool
      */
-    public function findIfSafeTemperature($temperature)
+    public function findIfSafeTemperature($low,$high)
     {
-        $lowerRange = '0';
-        $upperRange = '24';
-        if (($lowerRange < $temperature) && ($temperature <= $upperRange)) {
+        $lowerRange = '10';
+        $upperRange = '35';
+        if (($low > $lowerRange) && ($high < $upperRange)){
 
             return true;
         }
@@ -110,8 +113,23 @@ class Weather
         return false;
     }
 
+    /**
+     * Find if the weather is clear for takeoff
+     *
+     * @param $weather
+     * @return bool
+     */
     public function findIfSafeWeather($weather)
     {
+        $condition  = $weather->conditions;
+        $snowAllDay = $weather->snow_allday->in;
+        $snowDay    = $weather->snow_day->in;
+
+        if(($condition == 'Clear') && ($snowAllDay == '0') &&($snowDay== '0')){
+
+            return true;
+        }
+        return false;
 
     }
 
